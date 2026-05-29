@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday, Cie! 🌹</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Sacramento&family=Jost:wght@300;400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       CSS CUSTOM PROPERTIES
+    ============================================================ */
+    :root {
+      --cream:      #fdf6ee;
+      --blush:      #f2c4c4;
+      --blush-dark: #e8a0a0;
+      --rose:       #c0696b;
+      --rose-deep:  #8b3a3c;
+      --gold:       #c9a96e;
+      --gold-light: #e8d5b0;
+      --text-dark:  #3a2020;
+      --text-mid:   #7a4a4a;
+      --text-soft:  #b08080;
+      --white:      #ffffff;
+
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-script:  'Sacramento', cursive;
+      --font-body:    'Jost', sans-serif;
+
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--cream);
+      color: var(--text-dark);
+      min-height: 100dvh;
+      overflow-x: hidden;
+    }
+
+    /* Ambient background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 10%,  rgba(242,196,196,0.35) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 90%,  rgba(201,169,110,0.18) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 70% at 90% 20%,  rgba(242,196,196,0.20) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ============================================================
+       SCREEN HELPERS
+    ============================================================ */
+    .screen {
+      position: relative;
+      z-index: 1;
+      min-height: 100dvh;
+      width: 100%;
+    }
+    .screen--hidden { display: none !important; }
+
+    /* ============================================================
+       SCREEN 1 — THE GATE
+    ============================================================ */
+    #screen-gate {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+
+    /* Sparkle canvas sits behind gate content */
+    #sparkle-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .gate__flourish {
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      letter-spacing: 0.4em;
+      margin-bottom: 1.2rem;
+      opacity: 0.55;
+      animation: float 4s ease-in-out infinite;
+      position: relative;
+      z-index: 1;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-8px); }
+    }
+
+    .gate__heading {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 8vw, 5.5rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--rose-deep);
+      line-height: 1.1;
+      position: relative;
+      z-index: 1;
+    }
+
+    .gate__heading span {
+      display: block;
+      font-family: var(--font-script);
+      font-size: clamp(3.5rem, 11vw, 7rem);
+      color: var(--rose);
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1.15;
+      margin-top: -0.15em;
+    }
+
+    .gate__divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1.8rem 0;
+      width: min(340px, 90%);
+      position: relative;
+      z-index: 1;
+    }
+    .gate__divider::before,
+    .gate__divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+    }
+    .gate__divider-icon { color: var(--gold); font-size: 1rem; opacity: 0.8; }
+
+    .gate__tagline {
+      font-weight: 300;
+      font-size: clamp(0.85rem, 2.5vw, 1rem);
+      color: var(--text-soft);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .gate__card {
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(201,169,110,0.30);
+      border-radius: 20px;
+      padding: clamp(1.8rem, 5vw, 2.8rem) clamp(1.5rem, 5vw, 2.8rem);
+      width: min(380px, 95%);
+      box-shadow:
+        0 4px 24px rgba(139,58,60,0.07),
+        0 1px 4px rgba(139,58,60,0.05),
+        inset 0 1px 0 rgba(255,255,255,0.8);
+      position: relative;
+      z-index: 1;
+    }
+
+    .gate__card-label {
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .gate__input {
+      width: 100%;
+      padding: 0.85rem 1.1rem;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--text-dark);
+      background: var(--cream);
+      border: 1.5px solid var(--gold-light);
+      border-radius: 10px;
+      outline: none;
+      transition: border-color 0.25s, box-shadow 0.25s;
+      cursor: pointer;
+    }
+    .gate__input:focus {
+      border-color: var(--rose);
+      box-shadow: 0 0 0 3px rgba(192,105,107,0.14);
+    }
+
+    .gate__btn {
+      margin-top: 1.2rem;
+      width: 100%;
+      padding: 0.9rem 1.5rem;
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.2s var(--ease-spring), box-shadow 0.2s;
+      box-shadow: 0 4px 18px rgba(139,58,60,0.30);
+      position: relative;
+      overflow: hidden;
+    }
+    .gate__btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.18), transparent);
+      border-radius: inherit;
+    }
+    .gate__btn:hover  { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(139,58,60,0.36); }
+    .gate__btn:active { transform: translateY(0);    box-shadow: 0 2px 10px rgba(139,58,60,0.25); }
+    .gate__btn:disabled { opacity: 0.65; cursor: not-allowed; transform: none; }
+
+    .gate__error {
+      margin-top: 1rem;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      background: rgba(242,196,196,0.40);
+      border: 1px solid var(--blush);
+      font-size: 0.88rem;
+      color: var(--rose-deep);
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: opacity 0.3s, transform 0.3s;
+      pointer-events: none;
+    }
+    .gate__error.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .gate__note {
+      margin-top: 2rem;
+      font-size: 0.75rem;
+      color: var(--text-soft);
+      letter-spacing: 0.05em;
+      font-style: italic;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ============================================================
+       TRANSITION LAYER — DIGITAL FLOWER SPIRAL
+    ============================================================ */
+
+    /*
+      The transition layer is a fixed full-screen canvas that sits
+      above everything. It starts invisible; JS fills it with flowers,
+      then the whole layer fades out to reveal the gallery.
+    */
+    #transition-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      overflow: hidden;          /* clip flowers that spawn near edges  */
+      pointer-events: none;      /* pass-through until active            */
+      opacity: 0;
+      /* Hardware-composite the fade-out on the GPU */
+      will-change: opacity;
+      transition: opacity 2.5s ease-in-out;  /* the big reveal fade     */
+    }
+
+    /* When JS adds .is-fading, the whole layer fades to transparent */
+    #transition-layer.is-fading { opacity: 0; }
+
+    /* While flowers are spawning the layer must be opaque & visible */
+    #transition-layer.is-active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /*
+      Each flower is a <span> appended by JS.
+      - position: absolute  → placed by JS-calculated x/y
+      - will-change: transform, opacity  → GPU layer per flower
+      - animation: bloom-in  → pops from scale(0) to scale(1)
+    */
+    .flower {
+      position: absolute;
+      line-height: 1;
+      /* Centre the emoji on its coordinate point */
+      transform-origin: center center;
+      will-change: transform, opacity;
+      /* Hardware-accelerated pop-in */
+      animation: bloom-in 0.45s var(--ease-spring) both;
+      /* Depth illusion */
+      filter: drop-shadow(0 3px 6px rgba(80, 20, 20, 0.22));
+      /* Prevent text cursor on emoji */
+      user-select: none;
+      pointer-events: none;
+    }
+
+    /*
+      bloom-in: flower scales from 0 (invisible) to its final size.
+      Using transform only — no layout thrash, GPU composited.
+    */
+    @keyframes bloom-in {
+      0%   { transform: var(--flower-transform) scale(0) rotate(var(--flower-rot)); opacity: 0; }
+      60%  { opacity: 1; }
+      100% { transform: var(--flower-transform) scale(var(--flower-scale)) rotate(var(--flower-rot)); opacity: 1; }
+    }
+
+    /*
+      No additional animation on the layer itself — keeping it
+      simple ensures will-change: opacity composites cleanly
+      on both iOS Safari and desktop Chrome/Firefox.
+      The blooming flowers provide all the visual motion needed.
+    */
+
+    /* ============================================================
+       MUSIC PLAYER PILL
+    ============================================================ */
+    #music-pill {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.55rem 1rem 0.55rem 0.7rem;
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(201,169,110,0.35);
+      border-radius: 999px;
+      box-shadow: 0 4px 20px rgba(139,58,60,0.14), 0 1px 4px rgba(139,58,60,0.08);
+      cursor: pointer;
+      transition: transform 0.2s var(--ease-spring), box-shadow 0.2s, opacity 0.4s;
+      opacity: 0;
+      transform: translateY(20px);
+      user-select: none;
+    }
+    #music-pill.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    #music-pill:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(139,58,60,0.20);
+    }
+    #music-pill:active { transform: translateY(0); }
+
+    .pill__icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--rose), var(--rose-deep));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.2s var(--ease-spring);
+    }
+    #music-pill:hover .pill__icon { transform: scale(1.08); }
+
+    .pill__icon svg { width: 14px; height: 14px; fill: white; }
+
+    .pill__text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+    .pill__label {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+    }
+    .pill__song {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 0.82rem;
+      color: var(--rose-deep);
+      font-weight: 300;
+      max-width: 130px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Vinyl spin ring around icon when playing */
+    .pill__icon::after {
+      content: '';
+      position: absolute;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(201,169,110,0.45);
+      animation: spin 4s linear infinite;
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    #music-pill.is-playing .pill__icon { position: relative; }
+    #music-pill.is-playing .pill__icon::after { opacity: 1; }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    /* Bars animation (visible when playing) */
+    .pill__bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 14px;
+      margin-left: 2px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    #music-pill.is-playing .pill__bars { opacity: 1; }
+
+    .pill__bars span {
+      display: block;
+      width: 3px;
+      border-radius: 2px;
+      background: var(--rose);
+      animation: bar 0.9s ease-in-out infinite;
+    }
+    .pill__bars span:nth-child(1) { height: 6px;  animation-delay: 0s; }
+    .pill__bars span:nth-child(2) { height: 12px; animation-delay: 0.18s; }
+    .pill__bars span:nth-child(3) { height: 8px;  animation-delay: 0.36s; }
+    .pill__bars span:nth-child(4) { height: 14px; animation-delay: 0.08s; }
+
+    @keyframes bar {
+      0%, 100% { transform: scaleY(0.4); }
+      50%       { transform: scaleY(1.0); }
+    }
+
+    /* ============================================================
+       SCREEN 2 — THE GALLERY
+    ============================================================ */
+    #screen-gallery {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 4vw, 2.5rem) 6rem;
+    }
+
+    .gallery__hero {
+      text-align: center;
+      max-width: 680px;
+      margin-bottom: clamp(2.5rem, 6vw, 4rem);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.9s var(--ease-smooth), transform 0.9s var(--ease-smooth);
+    }
+    .gallery__hero.is-visible { opacity: 1; transform: translateY(0); }
+
+    .gallery__pre {
+      font-size: 0.75rem;
+      letter-spacing: 0.30em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .gallery__title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 7vw, 5rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--rose-deep);
+      line-height: 1.1;
+      margin-bottom: 0.8rem;
+    }
+    .gallery__title strong { font-weight: 600; font-style: normal; color: var(--rose); }
+
+    .gallery__script-line {
+      font-family: var(--font-script);
+      font-size: clamp(2rem, 5.5vw, 3.2rem);
+      color: var(--text-mid);
+      display: block;
+      margin-top: -0.3rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .gallery__message {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      font-weight: 300;
+      color: var(--text-mid);
+      line-height: 1.75;
+      font-style: italic;
+    }
+
+    .gallery__rule {
+      width: min(120px, 40%);
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      margin: 2rem auto;
+    }
+
+    /* ── Photo Grid ── */
+    .gallery__grid {
+      width: 100%;
+      max-width: 1100px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(0.6rem, 1.5vw, 1rem);
+    }
+
+    .photo-card {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--blush) 0%, var(--gold-light) 100%);
+      box-shadow: 0 2px 12px rgba(139,58,60,0.10), 0 1px 3px rgba(139,58,60,0.07);
+      opacity: 0;
+      transform: translateY(24px) scale(0.97);
+      transition:
+        opacity 0.6s var(--ease-smooth),
+        transform 0.6s var(--ease-smooth),
+        box-shadow 0.3s ease;
+      cursor: pointer;
+      aspect-ratio: 4 / 3;
+    }
+
+    /* tall first card */
+    .photo-card:nth-child(1) { grid-row: span 2; aspect-ratio: auto; }
+    /* wide fourth card */
+    .photo-card:nth-child(4) { grid-column: span 2; }
+
+    .photo-card.is-visible { opacity: 1; transform: translateY(0) scale(1); }
+
+    .photo-card:nth-child(1) { transition-delay: 0.10s; }
+    .photo-card:nth-child(2) { transition-delay: 0.20s; }
+    .photo-card:nth-child(3) { transition-delay: 0.30s; }
+    .photo-card:nth-child(4) { transition-delay: 0.40s; }
+    .photo-card:nth-child(5) { transition-delay: 0.50s; }
+    .photo-card:nth-child(6) { transition-delay: 0.60s; }
+
+    .photo-card:hover {
+      box-shadow: 0 10px 36px rgba(139,58,60,0.20), 0 3px 10px rgba(139,58,60,0.12);
+      z-index: 2;
+    }
+    .photo-card:hover .photo-card__img { transform: scale(1.06); }
+
+    .photo-card__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s var(--ease-smooth);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Placeholder emoji when no image */
+    .photo-card__placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      z-index: 0;
+    }
+    .photo-card__placeholder-icon {
+      font-size: clamp(2rem, 5vw, 3rem);
+      opacity: 0.35;
+    }
+    .photo-card__placeholder-text {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--rose-deep);
+      opacity: 0.45;
+    }
+
+    .photo-card__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(139,58,60,0.55) 0%, transparent 55%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      display: flex;
+      align-items: flex-end;
+      padding: 1rem 1.2rem;
+      z-index: 2;
+    }
+    .photo-card:hover .photo-card__overlay { opacity: 1; }
+
+    .photo-card__caption {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.92);
+      font-weight: 300;
+    }
+
+    /* ── Lightbox ── */
+    #lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: rgba(58,32,32,0.88);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      padding: 1.5rem;
+    }
+    #lightbox.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 85dvh;
+      border-radius: 12px;
+      object-fit: contain;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      transform: scale(0.92);
+      transition: transform 0.3s var(--ease-spring);
+    }
+    #lightbox.is-open img { transform: scale(1); }
+
+    #lightbox-caption {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1rem;
+      color: rgba(255,255,255,0.75);
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    #lightbox-close {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.5rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.30);
+      background: rgba(255,255,255,0.10);
+      color: white;
+      font-size: 1.3rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, transform 0.2s;
+      line-height: 1;
+    }
+    #lightbox-close:hover { background: rgba(255,255,255,0.22); transform: scale(1.1); }
+
+    /* Gallery footer */
+    .gallery__footer {
+      margin-top: 3.5rem;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 1s ease 1s;
+    }
+    .gallery__footer.is-visible { opacity: 1; }
+
+    .gallery__footer-rose {
+      font-size: 1.8rem;
+      letter-spacing: 0.5em;
+      display: block;
+      margin-bottom: 0.5rem;
+      animation: float 4s ease-in-out infinite;
+    }
+    .gallery__footer-text {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(0.85rem, 2vw, 1rem);
+      color: var(--text-soft);
+      font-weight: 300;
+    }
+
+    /* Confetti canvas */
+    #confetti-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 50;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 768px) {
+      .gallery__grid { grid-template-columns: repeat(2, 1fr); }
+      .photo-card:nth-child(1) { grid-row: auto; aspect-ratio: 4/3; }
+      .photo-card:nth-child(4) { grid-column: auto; }
+    }
+    @media (max-width: 480px) {
+      .gallery__grid { grid-template-columns: 1fr; }
+      #music-pill { bottom: 1rem; right: 1rem; }
+    }
+
+    /* ============================================================
+       SHAKE (error feedback)
+    ============================================================ */
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      15%      { transform: translateX(-6px); }
+      30%      { transform: translateX( 6px); }
+      45%      { transform: translateX(-5px); }
+      60%      { transform: translateX( 5px); }
+      75%      { transform: translateX(-3px); }
+      90%      { transform: translateX( 3px); }
+    }
+    .shake { animation: shake 0.55s ease both; }
+  </style>
+</head>
+<body>
+
+  <!-- Hidden audio element — add your MP3 src below -->
+  <!--
+    ══════════════════════════════════════════════════════════════
+    MUSIC: Set the src attribute to your MP3 URL or file path.
+    Example: src="music/happy-birthday.mp3"
+             src="https://example.com/song.mp3"
+
+    SONG_TITLE below in the JS config also controls the pill label.
+    ══════════════════════════════════════════════════════════════
+  -->
+  <audio id="bg-music" loop preload="auto">
+    <source src="https://youtu.be/ZFlpVBFSEis?si=IgTlFu9csAPrXWqB" type="audio/mpeg" id="music-source" />
+  </audio>
+
+  <!-- Sparkle canvas (gate screen ambient effect) -->
+  <canvas id="sparkle-canvas"></canvas>
+
+  <!-- Confetti canvas -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- ============================================================
+       SCREEN 1 — THE GATE
+  ============================================================ -->
+  <section id="screen-gate" class="screen">
+    <div class="gate__flourish" aria-hidden="true">🌸 ✦ 🌸</div>
+
+    <h1 class="gate__heading">
+      Happy Birthday
+      <span>Cie!</span>
+    </h1>
+
+    <div class="gate__divider"><span class="gate__divider-icon">✦</span></div>
+
+    <p class="gate__tagline">A little something just for you</p>
+
+    <div class="gate__card" role="main">
+      <label class="gate__card-label" for="dob-input">
+        Enter your date of birth to unlock ✨
+      </label>
+      <input
+        class="gate__input"
+        type="date"
+        id="dob-input"
+        aria-describedby="dob-error"
+        max="2099-12-31"
+      />
+      <button class="gate__btn" id="unlock-btn" type="button">
+        Unlock the surprise 🌹
+      </button>
+      <div class="gate__error" id="dob-error" role="alert" aria-live="polite">
+        Hmm, that doesn't seem right — try again, lovely! 🌷
+      </div>
+    </div>
+
+    <p class="gate__note">This page was made with love 💕</p>
+  </section>
+
+  <!-- ============================================================
+       TRANSITION LAYER — flowers are dynamically appended here by JS
+       The div starts invisible (opacity:0) and becomes .is-active
+       when the spiral begins, then .is-fading when it ends.
+  ============================================================ -->
+  <div id="transition-layer" aria-hidden="true" role="presentation"></div>
+
+  <!-- ============================================================
+       SCREEN 2 — THE GALLERY
+  ============================================================ -->
+  <section id="screen-gallery" class="screen screen--hidden">
+
+    <div class="gallery__hero" id="gallery-hero">
+      <p class="gallery__pre">✦ &nbsp; With love &nbsp; ✦</p>
+      <h2 class="gallery__title">
+        Here's to <strong>you,</strong>
+        <span class="gallery__script-line">the one &amp; only Ciecie</span>
+      </h2>
+      <div class="gallery__rule"></div>
+      <!--
+        ══════════════════════════════════════════
+        PERSONALISE: Edit this birthday message
+        ══════════════════════════════════════════
+      -->
+      <p class="gallery__message">
+        May this year bring you all the joy, laughter, and magic you so effortlessly give to everyone around you. You are so deeply loved — today, and every day. 🎂
+      </p>
+    </div>
+
+    <!-- Photo Grid
+         ══════════════════════════════════════════════════════════
+         Replace src="#" with real URLs or relative paths.
+         Edit data-caption for the hover label on each photo.
+         ══════════════════════════════════════════════════════════
+    -->
+    <div class="gallery__grid" id="gallery-grid">
+
+      <div class="photo-card" data-caption="Always shining ✨">
+        <div class="photo-card__placeholder">
+          <span class="photo-card__placeholder-icon">🌹</span>
+          <span class="photo-card__placeholder-text">Your photo here</span>
+        </div>
+        <img class="photo-card__img" src="#" alt="Amy — Photo 1" loading="lazy" />
+        <div class="photo-card__overlay">
+          <span class="photo-card__caption">Always shining ✨</span>
+        </div>
+      </div>
+
+      <div class="photo-card" data-caption="Brighter than sunshine 🌟">
+        <div class="photo-card__placeholder">
+          <span class="photo-card__placeholder-icon">🌸</span>
+          <span class="photo-card__placeholder-text">Your photo here</span>
+        </div>
+        <img class="photo-card__img" src="#" alt="Amy — Photo 2" loading="lazy" />
+        <div class="photo-card__overlay">
+          <span class="photo-card__caption">Brighter than sunshine 🌟</span>
+        </div>
+      </div>
+
+      <div class="photo-card" data-caption="One of a kind 💫">
+        <div class="photo-card__placeholder">
+          <span class="photo-card__placeholder-icon">🎀</span>
+          <span class="photo-card__placeholder-text">Your photo here</span>
+        </div>
+        <img class="photo-card__img" src="#" alt="Amy — Photo 3" loading="lazy" />
+        <div class="photo-card__overlay">
+          <span class="photo-card__caption">One of a kind 💫</span>
+        </div>
+      </div>
+
+      <div class="photo-card" data-caption="The life of the party 🎉">
+        <div class="photo-card__placeholder">
+          <span class="photo-card__placeholder-icon">🌷</span>
+          <span class="photo-card__placeholder-text">Your photo here</span>
+        </div>
+        <img class="photo-card__img" src="#" alt="Amy — Photo 4" loading="lazy" />
+        <div class="photo-card__overlay">
+          <span class="photo-card__caption">The life of the party 🎉</span>
+        </div>
+      </div>
+
+      <div class="photo-card" data-caption="Pure joy 🎂">
+        <div class="photo-card__placeholder">
+          <span class="photo-card__placeholder-icon">✨</span>
+          <span class="photo-card__placeholder-text">Your photo here</span>
+        </div>
+        <img class="photo-card__img" src="#" alt="Amy — Photo 5" loading="lazy" />
+        <div class="photo-card__overlay">
+          <span class="photo-card__caption">Pure joy 🎂</span>
+        </div>
+      </div>
+
+      <div class="photo-card" data-caption="Unforgettable 🌹">
+        <div class="photo-card__placeholder">
+          <span class="photo-card__placeholder-icon">💕</span>
+          <span class="photo-card__placeholder-text">Your photo here</span>
+        </div>
+        <img class="photo-card__img" src="#" alt="Amy — Photo 6" loading="lazy" />
+        <div class="photo-card__overlay">
+          <span class="photo-card__caption">Unforgettable 🌹</span>
+        </div>
+      </div>
+
+    </div>
+
+    <footer class="gallery__footer" id="gallery-footer">
+      <span class="gallery__footer-rose" aria-hidden="true">🌹 🌹 🌹</span>
+      <p class="gallery__footer-text">Made with all the love in the world — Happy Birthday Amy! 💕</p>
+    </footer>
+
+  </section>
+
+  <!-- Music player pill (revealed after unlock) -->
+  <div id="music-pill" role="button" tabindex="0" aria-label="Toggle music">
+    <div class="pill__icon">
+      <!-- Play icon (shown when paused) -->
+      <svg id="pill-icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+      <!-- Pause icon (shown when playing) -->
+      <svg id="pill-icon-pause" viewBox="0 0 24 24" aria-hidden="true" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+    </div>
+    <div class="pill__text">
+      <span class="pill__label">Now playing</span>
+      <span class="pill__song" id="pill-song-name">Birthday Song</span>
+    </div>
+    <div class="pill__bars" aria-hidden="true">
+      <span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <button id="lightbox-close" aria-label="Close photo">&times;</button>
+    <img id="lightbox-img" src="" alt="" />
+    <div id="lightbox-caption"></div>
+  </div>
+
+
+  <script>
+    /* ╔══════════════════════════════════════════════════════════╗
+       ║              ✏️  CONFIGURATION — EDIT HERE              ║
+       ╚══════════════════════════════════════════════════════════╝
+
+       1. CORRECT_DOB  — Amy's birthday in YYYY-MM-DD format.
+          Example: '1998-03-15' means March 15, 1998.
+
+       2. MUSIC_URL    — Path or URL to your MP3 file.
+          Options:
+            • Relative file:  'music/happy-birthday.mp3'
+            • External URL:   'https://example.com/song.mp3'
+            • Leave '' to use the built-in synth jingle (no file needed).
+
+       3. SONG_TITLE   — Displayed on the music pill.
+    ================================================================ */
+    const CORRECT_DOB  = '1999-05-29';              // ← ✏️ Amy's real DOB
+    const MUSIC_URL    = 'https://youtu.be/ZFlpVBFSEis?si=IgTlFu9csAPrXWqB';          // ← ✏️ MP3 path/URL (or leave blank)
+    const SONG_TITLE   = 'Mirrors by Justin Timberlake 🎵';       // ← ✏️ Song name for the pill
+
+
+    /* ============================================================
+       DOM REFERENCES
+    ============================================================ */
+    const gateScreen      = document.getElementById('screen-gate');
+    const galleryScreen   = document.getElementById('screen-gallery');
+    const transitionLayer = document.getElementById('transition-layer');
+    const dobInput        = document.getElementById('dob-input');
+    const unlockBtn       = document.getElementById('unlock-btn');
+    const errorMsg        = document.getElementById('dob-error');
+    const galleryHero     = document.getElementById('gallery-hero');
+    const galleryGrid     = document.getElementById('gallery-grid');
+    const galleryFooter   = document.getElementById('gallery-footer');
+    const confettiCanvas  = document.getElementById('confetti-canvas');
+    const sparkleCanvas   = document.getElementById('sparkle-canvas');
+    const musicPill       = document.getElementById('music-pill');
+    const pillSongName    = document.getElementById('pill-song-name');
+    const pillIconPlay    = document.getElementById('pill-icon-play');
+    const pillIconPause   = document.getElementById('pill-icon-pause');
+    const bgMusic         = document.getElementById('bg-music');
+    const musicSource     = document.getElementById('music-source');
+    const lightbox        = document.getElementById('lightbox');
+    const lightboxImg     = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const lightboxClose   = document.getElementById('lightbox-close');
+
+
+    /* ============================================================
+       SPARKLE CANVAS — ambient floating particles on gate screen
+    ============================================================ */
+    (function initSparkles() {
+      const cvs = sparkleCanvas;
+      const ctx = cvs.getContext('2d');
+      let sparks = [];
+
+      function resize() {
+        cvs.width  = window.innerWidth;
+        cvs.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      const SPARK_COLORS = ['#f2c4c4','#c9a96e','#e8a0a0','#e8d5b0','#c0696b'];
+
+      function mkSpark() {
+        return {
+          x:   Math.random() * cvs.width,
+          y:   Math.random() * cvs.height,
+          r:   Math.random() * 2.2 + 0.5,
+          op:  0,
+          maxOp: Math.random() * 0.5 + 0.15,
+          vx:  (Math.random() - 0.5) * 0.3,
+          vy:  -(Math.random() * 0.4 + 0.1),
+          life: 0,
+          maxLife: Math.random() * 200 + 120,
+          color: SPARK_COLORS[Math.floor(Math.random() * SPARK_COLORS.length)],
+        };
+      }
+
+      for (let i = 0; i < 55; i++) {
+        const s = mkSpark();
+        s.life = Math.random() * s.maxLife; // stagger start
+        sparks.push(s);
+      }
+
+      function tickSparkles() {
+        ctx.clearRect(0, 0, cvs.width, cvs.height);
+        sparks.forEach((s, i) => {
+          s.life++;
+          s.x += s.vx;
+          s.y += s.vy;
+
+          // Fade in / out
+          const half = s.maxLife / 2;
+          s.op = s.life < half
+            ? (s.life / half) * s.maxOp
+            : ((s.maxLife - s.life) / half) * s.maxOp;
+
+          if (s.life >= s.maxLife) {
+            sparks[i] = mkSpark(); // recycle
+            sparks[i].life = 0;
+          }
+
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+          ctx.fillStyle = s.color;
+          ctx.globalAlpha = s.op;
+          ctx.fill();
+        });
+        ctx.globalAlpha = 1;
+        requestAnimationFrame(tickSparkles);
+      }
+      tickSparkles();
+    })();
+
+
+    /* ============================================================
+       GATE — DOB VALIDATION
+    ============================================================ */
+    unlockBtn.addEventListener('click', handleUnlock);
+    dobInput.addEventListener('keydown', e => { if (e.key === 'Enter') handleUnlock(); });
+
+    function handleUnlock() {
+      const value = dobInput.value;
+
+      if (!value) {
+        showError("Don't forget to pick your birthday date! 🗓️");
+        return;
+      }
+
+      if (value === CORRECT_DOB) {
+        hideError();
+
+        /*
+          ╔═══════════════════════════════════════════════════════╗
+          ║  CRITICAL — iOS AUDIO UNLOCK                         ║
+          ║  iOS Safari requires audio.play() to be called       ║
+          ║  synchronously inside a user-gesture handler.        ║
+          ║  We call it here, inside the click callback, BEFORE  ║
+          ║  any setTimeout. This is the only reliable way.      ║
+          ╚═══════════════════════════════════════════════════════╝
+        */
+        startMusic(); // must be synchronous here — do not move inside setTimeout
+
+        startTransition();
+      } else {
+        showError("Hmm, that doesn't seem right — try again, lovely! 🌷");
+        dobInput.classList.add('shake');
+        dobInput.addEventListener('animationend', () => dobInput.classList.remove('shake'), { once: true });
+      }
+    }
+
+    function showError(msg) {
+      errorMsg.textContent = msg;
+      errorMsg.classList.add('is-visible');
+    }
+    function hideError() {
+      errorMsg.classList.remove('is-visible');
+    }
+
+
+    /* ============================================================
+       MUSIC — Web Audio API synth fallback + real MP3 support
+    ============================================================ */
+    let audioCtx       = null;   // Web Audio context (synth fallback)
+    let gainNode       = null;   // Master gain for fade-in/out
+    let synthNodes     = [];     // Active oscillator nodes
+    let usingRealAudio = false;  // true = MP3, false = synth
+    let musicStarted   = false;
+
+    function startMusic() {
+      if (musicStarted) return;
+      musicStarted = true;
+
+      pillSongName.textContent = SONG_TITLE;
+
+      if (MUSIC_URL) {
+        // ── Real MP3 path ──────────────────────────────────────
+        usingRealAudio = true;
+        musicSource.src = MUSIC_URL;
+        bgMusic.load();
+
+        bgMusic.volume = 0;
+        const playPromise = bgMusic.play();
+
+        if (playPromise !== undefined) {
+          playPromise.then(() => {
+            fadeAudioIn(bgMusic, 0, 0.65, 2000);
+            setPillPlaying(true);
+          }).catch(err => {
+            // Autoplay blocked on some browsers even with gesture —
+            // show the pill so user can tap manually.
+            console.warn('Audio play failed:', err);
+            setPillPlaying(false);
+          });
+        }
+      } else {
+        // ── Web Audio API synth jingle (no file needed) ────────
+        usingRealAudio = false;
+        try {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          gainNode = audioCtx.createGain();
+          gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+          gainNode.gain.linearRampToValueAtTime(0.18, audioCtx.currentTime + 1.8);
+          gainNode.connect(audioCtx.destination);
+
+          playSynthLoop();
+          setPillPlaying(true);
+        } catch(e) {
+          console.warn('Web Audio not supported:', e);
+        }
+      }
+    }
+
+    /* Gentle fade-in for HTMLAudioElement */
+    function fadeAudioIn(el, from, to, durationMs) {
+      el.volume = from;
+      const steps    = 40;
+      const stepTime = durationMs / steps;
+      const stepVol  = (to - from) / steps;
+      let   count    = 0;
+
+      const iv = setInterval(() => {
+        count++;
+        el.volume = Math.min(to, el.volume + stepVol);
+        if (count >= steps) clearInterval(iv);
+      }, stepTime);
+    }
+
+    /* Gentle fade-out for HTMLAudioElement */
+    function fadeAudioOut(el, durationMs, cb) {
+      const from     = el.volume;
+      const steps    = 30;
+      const stepTime = durationMs / steps;
+      const stepVol  = from / steps;
+      let   count    = 0;
+
+      const iv = setInterval(() => {
+        count++;
+        el.volume = Math.max(0, el.volume - stepVol);
+        if (count >= steps) {
+          clearInterval(iv);
+          el.pause();
+          if (cb) cb();
+        }
+      }, stepTime);
+    }
+
+    /*
+      Synth: plays a simple looping ambient arpeggio using the Web
+      Audio API. No MP3 file required — works on all devices.
+      Notes are a soft pentatonic pattern at low volume.
+    */
+    function playSynthLoop() {
+      if (!audioCtx || !gainNode) return;
+
+      // Pentatonic scale (Hz) — gentle and cheerful
+      const notes = [261.63, 293.66, 329.63, 392.00, 440.00,
+                     523.25, 392.00, 329.63, 293.66, 261.63];
+      const noteDuration = 0.55; // seconds per note
+      const totalDuration = notes.length * noteDuration;
+      let   t = audioCtx.currentTime + 0.1;
+
+      notes.forEach((freq) => {
+        const osc  = audioCtx.createOscillator();
+        const amp  = audioCtx.createGain();
+
+        osc.type      = 'sine';
+        osc.frequency.setValueAtTime(freq, t);
+
+        amp.gain.setValueAtTime(0, t);
+        amp.gain.linearRampToValueAtTime(0.7, t + 0.08);
+        amp.gain.linearRampToValueAtTime(0,   t + noteDuration - 0.05);
+
+        osc.connect(amp);
+        amp.connect(gainNode);
+        osc.start(t);
+        osc.stop(t + noteDuration);
+
+        synthNodes.push(osc);
+        t += noteDuration;
+      });
+
+      // Loop after all notes finish
+      const loopDelay = totalDuration * 1000 + 400;
+      setTimeout(() => {
+        if (musicStarted && !musicPaused) playSynthLoop();
+      }, loopDelay);
+    }
+
+    let musicPaused = false;
+
+    /* Toggle play/pause from pill */
+    function toggleMusic() {
+      if (usingRealAudio) {
+        if (bgMusic.paused) {
+          bgMusic.play().then(() => {
+            fadeAudioIn(bgMusic, bgMusic.volume, 0.65, 600);
+            setPillPlaying(true);
+            musicPaused = false;
+          });
+        } else {
+          fadeAudioOut(bgMusic, 600, () => {});
+          bgMusic.pause();
+          setPillPlaying(false);
+          musicPaused = true;
+        }
+      } else {
+        // Synth: toggle master gain
+        if (!audioCtx) return;
+        if (!musicPaused) {
+          gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.5);
+          setPillPlaying(false);
+          musicPaused = true;
+        } else {
+          gainNode.gain.linearRampToValueAtTime(0.18, audioCtx.currentTime + 0.5);
+          playSynthLoop();
+          setPillPlaying(true);
+          musicPaused = false;
+        }
+      }
+    }
+
+    function setPillPlaying(playing) {
+      if (playing) {
+        musicPill.classList.add('is-playing');
+        pillIconPlay.style.display  = 'none';
+        pillIconPause.style.display = 'block';
+      } else {
+        musicPill.classList.remove('is-playing');
+        pillIconPlay.style.display  = 'block';
+        pillIconPause.style.display = 'none';
+      }
+    }
+
+    musicPill.addEventListener('click', toggleMusic);
+    musicPill.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleMusic(); }
+    });
+
+
+    /* ============================================================
+       ██████████████████████████████████████████████████████████
+       ██   DIGITAL FLOWER SPIRAL TRANSITION ENGINE             ██
+       ██████████████████████████████████████████████████████████
+
+       HOW IT WORKS
+       ────────────
+       We use an Archimedean spiral formula:
+           r  = SPIRAL_SPACING * θ          (radius grows with angle)
+           x  = cx + r * cos(θ) + jitter
+           y  = cy + r * sin(θ) + jitter
+
+       At each step we:
+         1. Calculate the next (x, y) on the spiral
+         2. Create a <span class="flower"> with a random emoji,
+            random size (50–80px), random rotation, random scale
+         3. Set CSS custom properties so the bloom-in @keyframe
+            knows the final transform values (GPU-composited)
+         4. Append it to #transition-layer
+         5. Schedule the next flower via setTimeout (≈16ms)
+
+       We stop when the radius is large enough to guarantee every
+       corner of the screen is covered (= half the screen diagonal
+       + a generous buffer).
+
+       SWAPPING EMOJIS FOR IMAGES
+       ───────────────────────────
+       To use PNG images instead of emojis:
+         • Change FLOWER_EMOJIS to an array of image URLs
+         • In spawnFlower(), replace the emoji span with:
+             const img = document.createElement('img');
+             img.src   = flower;
+             img.style.width  = size + 'px';
+             img.style.height = size + 'px';
+             el.appendChild(img);
+           (all the rest of the positioning/animation stays the same)
+    ============================================================ */
+
+    /* ── ✏️  FLOWER CONFIGURATION ───────────────────────────────── */
+
+    const FLOWER_EMOJIS = [
+      '🌸', '🌹', '🌻', '🌼', '🌺', '🌷', '🪷',
+      '🌸', '🌹', '🌸', '🌺', '🌷',   // repeat favourites for higher frequency
+    ];
+
+    const SPIRAL_CONFIG = {
+      spacing:       14,    // px between spiral arms (Archimedean b constant)
+      dTheta:        0.28,  // angle increment per step (radians); smaller = denser
+      minSize:       50,    // px — smallest flower font-size
+      maxSize:       82,    // px — largest flower font-size
+      jitterRadius:  22,    // px — max random offset from the spiral path
+      batchSize:     3,     // flowers spawned per setTimeout tick
+      tickMs:        16,    // ms between ticks (~60 fps feel)
+      cornerPad:     120,   // px beyond diagonal to guarantee corner coverage
+      admireMs:      2000,  // ms to pause on full-flower screen before fading
+      fadeDuration:  2500,  // ms — must match CSS transition on #transition-layer
+    };
+
+    /* ── MAIN ENTRY POINT ─────────────────────────────────────── */
+
+    function startTransition() {
+      // Prevent double-trigger
+      unlockBtn.disabled = true;
+
+      // Hide the gate immediately so it's gone before flowers cover it
+      gateScreen.classList.add('screen--hidden');
+
+      // Prepare gallery behind the transition (hidden but rendered)
+      galleryScreen.classList.remove('screen--hidden');
+      galleryScreen.style.visibility = 'hidden';
+
+      // Activate the transition layer
+      transitionLayer.classList.add('is-active');
+
+      // Begin the spiral on the next paint so the browser has
+      // rendered the layer as visible first
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          runSpiralAnimation();
+        });
+      });
+    }
+
+    /* ── SPIRAL ENGINE ────────────────────────────────────────── */
+
+    function runSpiralAnimation() {
+      const W  = window.innerWidth;
+      const H  = window.innerHeight;
+
+      // Spiral origin: screen centre
+      const cx = W / 2;
+      const cy = H / 2;
+
+      // The radius must reach every corner of the screen.
+      // Half-diagonal of the viewport gives us the farthest corner distance.
+      const halfDiag = Math.sqrt(cx * cx + cy * cy);
+      const maxRadius = halfDiag + SPIRAL_CONFIG.cornerPad;
+
+      let theta  = 0;  // current angle (radians) — starts at 0 (3 o'clock)
+      let radius = 0;  // current radius (px)
+
+      // documentFragment so we can batch-append without reflow per flower
+      // (though each tick is small, this is good practice)
+      let   tickTimer = null;
+
+      function tick() {
+        /*
+          Spawn BATCH_SIZE flowers per tick. Batching keeps the
+          setTimeout queue lean while still feeling fast.
+        */
+        for (let i = 0; i < SPIRAL_CONFIG.batchSize; i++) {
+
+          if (radius > maxRadius) {
+            // ── All flowers placed — screen is now fully covered ──
+            clearTimeout(tickTimer);
+            onSpiralComplete();
+            return;
+          }
+
+          // Place one flower at the current spiral position
+          spawnFlower(cx, cy, theta, radius);
+
+          // Advance the spiral: r = spacing * θ  (Archimedean)
+          theta  += SPIRAL_CONFIG.dTheta;
+          radius  = SPIRAL_CONFIG.spacing * theta;
+        }
+
+        // Schedule next batch
+        tickTimer = setTimeout(tick, SPIRAL_CONFIG.tickMs);
+      }
+
+      // Kick off!
+      tick();
+    }
+
+    /* ── FLOWER FACTORY ───────────────────────────────────────── */
+
+    function spawnFlower(cx, cy, theta, radius) {
+      const cfg = SPIRAL_CONFIG;
+
+      // Pick a random emoji from the pool
+      const emoji = FLOWER_EMOJIS[Math.floor(Math.random() * FLOWER_EMOJIS.length)];
+
+      // Random size between min and max
+      const size  = cfg.minSize + Math.random() * (cfg.maxSize - cfg.minSize);
+
+      // Random rotation for an organic look
+      const rot   = (Math.random() - 0.5) * 360; // degrees
+
+      // Random scale variation (0.85 – 1.15) for depth variation
+      const scale = 0.85 + Math.random() * 0.30;
+
+      // Slight random jitter off the perfect spiral path
+      const jx = (Math.random() - 0.5) * cfg.jitterRadius * 2;
+      const jy = (Math.random() - 0.5) * cfg.jitterRadius * 2;
+
+      // Final screen coordinates (top-left origin, centred on emoji)
+      const x = cx + radius * Math.cos(theta) + jx - size / 2;
+      const y = cy + radius * Math.sin(theta) + jy - size / 2;
+
+      // Build the DOM element
+      const el = document.createElement('span');
+      el.className   = 'flower';
+      el.textContent = emoji;
+      el.setAttribute('aria-hidden', 'true');
+
+      // Position
+      el.style.left     = x + 'px';
+      el.style.top      = y + 'px';
+      el.style.fontSize = size + 'px';
+
+      /*
+        Pass the final transform values to the CSS @keyframe via
+        custom properties. The animation interpolates:
+          scale(0) rotate(rot)  →  scale(finalScale) rotate(rot)
+        All on the compositor thread — no layout recalculation.
+      */
+      el.style.setProperty('--flower-scale',     scale);
+      el.style.setProperty('--flower-rot',       rot + 'deg');
+      el.style.setProperty('--flower-transform', 'translate(0,0)');
+
+      // Tiny random delay so flowers on the same tick don't all
+      // pop at exactly the same frame (max 80ms stagger)
+      el.style.animationDelay = (Math.random() * 80) + 'ms';
+
+      transitionLayer.appendChild(el);
+    }
+
+    /* ── AFTER SPIRAL COMPLETES ───────────────────────────────── */
+
+    function onSpiralComplete() {
+      /*
+        Pause so Amy can enjoy the full-screen flower moment,
+        then fade the transition layer to zero opacity,
+        then reveal and animate the gallery.
+      */
+      setTimeout(() => {
+
+        // Start the CSS fade-out (transition set in CSS: 2.5s ease-in-out)
+        transitionLayer.classList.remove('is-active');
+        transitionLayer.classList.add('is-fading');
+
+        // Reveal gallery mid-fade so it's ready when flowers clear
+        setTimeout(() => {
+          galleryScreen.style.visibility = '';   // restore visibility
+
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              // Animate hero message in
+              galleryHero.classList.add('is-visible');
+
+              // Stagger photo cards
+              animateGalleryCards();
+
+              // Footer, confetti, music pill
+              setTimeout(() => galleryFooter.classList.add('is-visible'), 800);
+              setTimeout(() => launchConfetti(), 300);
+              setTimeout(() => musicPill.classList.add('is-visible'),  500);
+            });
+          });
+
+          // Clean up: remove all flower nodes after fade completes
+          setTimeout(() => {
+            transitionLayer.innerHTML = '';
+            transitionLayer.classList.remove('is-fading');
+            transitionLayer.style.display = 'none';
+          }, SPIRAL_CONFIG.fadeDuration + 200);
+
+        }, SPIRAL_CONFIG.fadeDuration * 0.4);
+
+      }, SPIRAL_CONFIG.admireMs);
+    }
+
+
+    /* ============================================================
+       GALLERY CARDS — IntersectionObserver stagger
+    ============================================================ */
+    function animateGalleryCards() {
+      const cards = galleryGrid.querySelectorAll('.photo-card');
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { e.target.classList.add('is-visible'); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.08 });
+      cards.forEach(c => obs.observe(c));
+    }
+
+
+    /* ============================================================
+       LIGHTBOX
+    ============================================================ */
+    galleryGrid.addEventListener('click', e => {
+      const card = e.target.closest('.photo-card');
+      if (!card) return;
+
+      const img     = card.querySelector('.photo-card__img');
+      const caption = card.dataset.caption || '';
+
+      // Only open if the image has a real src (not "#" placeholder)
+      if (!img || !img.src || img.src.endsWith('#') || img.getAttribute('src') === '#') {
+        return; // no real image yet — don't open empty lightbox
+      }
+
+      lightboxImg.src        = img.src;
+      lightboxImg.alt        = img.alt;
+      lightboxCaption.textContent = caption;
+      lightbox.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      lightboxClose.focus();
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove('is-open');
+      document.body.style.overflow = '';
+      lightboxImg.src = '';
+    }
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+
+    /* ============================================================
+       CONFETTI CANNON — Pure canvas
+    ============================================================ */
+    (function setupConfetti() {
+      const ctx    = confettiCanvas.getContext('2d');
+      let pieces   = [];
+      let animId   = null;
+      let running  = false;
+
+      const COLORS = [
+        '#f2c4c4','#e8a0a0','#c0696b','#8b3a3c',
+        '#c9a96e','#e8d5b0','#fdf6ee','#d4a5a5',
+        '#f7dada','#b08080'
+      ];
+      const SHAPES = ['circle','rect','petal'];
+
+      function resize() {
+        confettiCanvas.width  = window.innerWidth;
+        confettiCanvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      function mkPiece() {
+        return {
+          x:       Math.random() * confettiCanvas.width,
+          y:       -20,
+          size:    Math.random() * 9 + 4,
+          color:   COLORS[Math.floor(Math.random() * COLORS.length)],
+          shape:   SHAPES[Math.floor(Math.random() * SHAPES.length)],
+          vx:      (Math.random() - 0.5) * 3,
+          vy:      Math.random() * 3 + 2,
+          rot:     Math.random() * Math.PI * 2,
+          rotV:    (Math.random() - 0.5) * 0.14,
+          opacity: 1,
+          fadeDelay: Math.random() * 120 + 80,
+          age:     0,
+        };
+      }
+
+      function drawPiece(p) {
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.globalAlpha = p.opacity;
+        ctx.fillStyle   = p.color;
+
+        if (p.shape === 'circle') {
+          ctx.beginPath();
+          ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
+          ctx.fill();
+        } else if (p.shape === 'rect') {
+          ctx.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2);
+        } else {
+          ctx.beginPath();
+          ctx.moveTo(0, -p.size / 2);
+          ctx.bezierCurveTo( p.size*.6, -p.size*.2,  p.size*.6, p.size*.5, 0, p.size/2);
+          ctx.bezierCurveTo(-p.size*.6,  p.size*.5, -p.size*.6,-p.size*.2, 0,-p.size/2);
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+
+      function tick() {
+        ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+        pieces = pieces.filter(p => p.opacity > 0.02 && p.y < confettiCanvas.height + 30);
+
+        pieces.forEach(p => {
+          p.x += p.vx; p.y += p.vy;
+          p.vy += 0.06; p.vx *= 0.99;
+          p.rot += p.rotV; p.age++;
+          if (p.age > p.fadeDelay) p.opacity -= 0.012;
+          drawPiece(p);
+        });
+
+        if (running || pieces.length > 0) animId = requestAnimationFrame(tick);
+        else animId = null;
+      }
+
+      window.launchConfetti = function() {
+        if (running) return;
+        running = true;
+        resize();
+
+        const total = 180;
+        let spawned = 0;
+        const iv = setInterval(() => {
+          const batch = Math.floor(Math.random() * 3) + 2;
+          for (let i = 0; i < batch && spawned < total; i++) {
+            pieces.push(mkPiece());
+            spawned++;
+          }
+          if (spawned >= total) { clearInterval(iv); running = false; }
+        }, 2500 / (total / 3));
+
+        if (!animId) tick();
+      };
+    })();
+
+  </script>
+</body>
+</html>
