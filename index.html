@@ -712,6 +712,58 @@
     }
 
     /* ============================================================
+       PERSONAL LETTER SECTION
+    ============================================================ */
+    .letter-section {
+      width: 100%;
+      max-width: 650px;
+      margin: 5rem auto 0;
+      text-align: center;
+      padding: 0 1.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s var(--ease-smooth), transform 1s var(--ease-smooth);
+    }
+    
+    /* We use the same 'is-visible' class logic as your photos */
+    .letter-section.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .letter-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--rose-deep);
+      margin-bottom: 1.5rem;
+    }
+
+    .letter-content {
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(201, 169, 110, 0.4);
+      border-radius: 16px;
+      padding: clamp(2rem, 5vw, 3rem);
+      text-align: left;
+      box-shadow: 0 4px 24px rgba(139, 58, 60, 0.05);
+    }
+
+    .letter-content p {
+      font-family: var(--font-body);
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--text-dark);
+      margin-bottom: 1.2rem;
+    }
+
+    .letter-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ============================================================
        RESPONSIVE
     ============================================================ */
     @media (max-width: 768px) {
@@ -902,6 +954,21 @@
       </div>
 
     </div>
+
+    <div class="letter-section" id="letter-section">
+      <h3 class="letter-title">My Notes to You</h3>
+      <div class="letter-content">
+        <p>Dear Ciecie,</p>
+        
+        <p>Write your first paragraph here. Tell her how much she means to you and why you wanted to make this for her.</p>
+        
+        <p>Write your second paragraph here. You can add as many of these paragraph tags as you need!</p>
+        
+        <p>With love,<br><strong>Your Name</strong></p>
+      </div>
+    </div>
+    <footer class="gallery__footer" id="gallery-footer">
+    ```
 
     <footer class="gallery__footer" id="gallery-footer">
       <span class="gallery__footer-rose" aria-hidden="true">🌹 🌹 🌹</span>
@@ -1511,16 +1578,21 @@
 
 
     /* ============================================================
-       GALLERY CARDS — IntersectionObserver stagger
+       GALLERY CARDS & LETTER — IntersectionObserver stagger
     ============================================================ */
     function animateGalleryCards() {
-      const cards = galleryGrid.querySelectorAll('.photo-card');
+      // Find all the photo cards AND the new letter section
+      const elements = document.querySelectorAll('.photo-card, .letter-section');
       const obs = new IntersectionObserver((entries) => {
         entries.forEach(e => {
-          if (e.isIntersecting) { e.target.classList.add('is-visible'); obs.unobserve(e.target); }
+          if (e.isIntersecting) { 
+             e.target.classList.add('is-visible'); 
+             obs.unobserve(e.target); 
+          }
         });
       }, { threshold: 0.08 });
-      cards.forEach(c => obs.observe(c));
+      
+      elements.forEach(el => obs.observe(el));
     }
 
 
